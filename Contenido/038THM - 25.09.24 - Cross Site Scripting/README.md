@@ -38,6 +38,9 @@
 
 ---
 
+## Prueba simple de XSS en campo de input
+`<script>alert('THM');</script>`
+
 ## 🧩 Polyglots en XSS
 - Un **polyglot** es un payload “todo terreno” capaz de:
   - Escapar de etiquetas (`</textarea>`, `</script>`, etc.)
