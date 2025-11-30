@@ -75,13 +75,66 @@ Nmap uses several states to describe the accessibility and behavior of a TCP or 
 ---
 
 ### 3. Service and OS Detection
-- `-O`: Detects the operating system.
 - `-sV`: Detects service versions.
-- `-A`: Enables OS detection, version detection, and advanced features.
+- `-O`: Detects the operating system.
+- `--traceroute`: Performs a traceroute to the target.
+- `-sC`: Default scripts
+- `-A`: Combines OS detection, version detection, default Scripts and traceroute
+
+
+#### 3.1 Service and Version Detection 
+
+Nmap can identify what service and version are running on open ports using the `-sV` option. This feature helps determine specific software details, which is crucial for vulnerability assessment.
+
+- `-sV` — Determines the service and version of open ports.
+- `-sV --version-light` — Performs a lightweight version scan (intensity level 2). Fast but less thorough.
+- `-sV --version-all` — Performs a full version scan (intensity level 9). Slower but more accurate.
 
 ---
 
-### 4. Timing and Performance
+### 4. Nmap Scripting Engine (NSE)
+Nmap integrates the **Nmap Scripting Engine (NSE)**, which uses scripts written in **Lua** to extend functionality. These scripts can perform vulnerability detection, brute-force attacks, malware discovery, and much more.
+
+#### 4.1 Key NSE Options
+
+- `--script=<script>` — Run a specific script.
+- `--script=<category>` — Run all scripts in a category.
+- `-sC` or `--script=default` — Run the default script set.
+
+**Example:**
+```bash
+sudo nmap --script=vuln 10.10.10.10
+```
+
+#### 4.2 Script Categories
+
+Below are all official **NSE script categories** with descriptions.
+
+| Category | Description |
+|-----------|-------------|
+| **auth** | Authentication-related scripts (login, credential checks). |
+| **broadcast** | Discover hosts by sending broadcast messages across the network. |
+| **brute** | Performs brute-force password auditing against logins. |
+| **default** | Default scripts (run with `-sC`). |
+| **discovery** | Retrieve accessible information such as database names, DNS entries, etc. |
+| **dos** | Detects servers vulnerable to Denial of Service (DoS) attacks. |
+| **exploit** | Attempts to exploit known vulnerabilities on the target. |
+| **external** | Uses third-party services like VirusTotal or Geoplugin to verify information. |
+| **fuzzer** | Launches fuzzing attacks to test service stability. |
+| **intrusive** | Intrusive scripts such as brute-force attacks and exploit attempts. |
+| **malware** | Scans for backdoors or malware-infected services. |
+| **safe** | Safe scripts that will not crash or alter the target. |
+| **version** | Retrieves or analyzes service version information. |
+| **vuln** | Checks for known vulnerabilities or exploitable conditions. |
+
+Scripts are located in:
+```bash
+/usr/share/nmap/scripts
+```
+
+---
+
+### 5. Timing and Performance
 - `-T<0-5>`: Timing templates from `paranoid (0)` to `insane (5)`.
 - `--min-parallelism` / `--max-parallelism`: Controls the number of parallel probes.
 - `--min-rate` / `--max-rate`: Sets packet send rate.
@@ -89,7 +142,7 @@ Nmap uses several states to describe the accessibility and behavior of a TCP or 
 
 ---
 
-### 5. Output and Reporting
+### 6. Output and Reporting
 - `-v`, `-vv`: Verbosity levels for more detailed output.
 - `-d`, `-d9`: Debug levels for deeper troubleshooting.
 - `-oN <filename>`: Normal output.
@@ -99,7 +152,7 @@ Nmap uses several states to describe the accessibility and behavior of a TCP or 
 
 ---
 
-### 6. Useful
+### 7. Useful
 
 | Opción | Propósito                                             |
 | ------ | ----------------------------------------------------- |
@@ -109,7 +162,7 @@ Nmap uses several states to describe the accessibility and behavior of a TCP or 
 
 ---
 
-### 7. Informational and Debugging Options
+### 8. Informational and Debugging Options
 
 | **Option** | **Purpose** |
 |-------------|-------------|
